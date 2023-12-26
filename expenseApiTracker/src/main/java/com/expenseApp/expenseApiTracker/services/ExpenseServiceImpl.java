@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.expenseApp.expenseApiTracker.entity.Expenses;
@@ -16,9 +18,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 	private ExpenseRepository expenseRepo;
 	
 	@Override
-	public List<Expenses> getAllExpenses(){
+	public Page<Expenses> getAllExpenses(Pageable page){
 
-		return expenseRepo.findAll();
+		return expenseRepo.findAll(page);
 		
 	}
 	

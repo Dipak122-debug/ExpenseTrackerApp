@@ -2,11 +2,14 @@ package com.expenseApp.expenseApiTracker.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.expenseApp.expenseApiTracker.entity.Expenses;
 
 public interface ExpenseService {
 	
-	List<Expenses> getAllExpenses();
+	Page<Expenses> getAllExpenses(Pageable page);
 	
 	Expenses getExpenseById(Long id);
 	
