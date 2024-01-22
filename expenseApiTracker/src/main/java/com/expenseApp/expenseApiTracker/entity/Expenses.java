@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,6 +14,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,18 +34,24 @@ public class Expenses {
 	private Long id;
 	
 	@Column(name="expense_name")
+	@NotBlank(message="Expense name should not be null")
+	@Size(min=3, message = "Size sould be atleast 3")
 	private String name;
 	
 	@Column(name="description")
+	@NotBlank(message="Description should not be null")
 	private String description;
 	
 	@Column(name="expense_amount")
+	@NotNull(message="Amount should not be null")
 	private BigDecimal amount;
 	
 	@Column(name="category")
+	@NotBlank(message="Category should not be null")
 	private String category;
 	
 	@Column(name="date")
+	@NotNull(message="Date should not be null")
 	private Date date;
 	
 	@Column(name="created_at", nullable=false, updatable=false)

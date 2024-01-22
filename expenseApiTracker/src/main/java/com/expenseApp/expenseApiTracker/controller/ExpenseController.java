@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.expenseApp.expenseApiTracker.entity.Expenses;
 import com.expenseApp.expenseApiTracker.services.ExpenseService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class ExpenseController {
 	
@@ -47,7 +49,7 @@ public class ExpenseController {
 	
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@PostMapping("/expenses")
-	public Expenses saveExpenseDetails(@RequestBody Expenses expense) {
+	public Expenses saveExpenseDetails(@Valid @RequestBody Expenses expense) {
 		return expenseService.saveExpenseDetails(expense);
 	}
 	
