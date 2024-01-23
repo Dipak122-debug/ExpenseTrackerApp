@@ -1,5 +1,6 @@
 package com.expenseApp.expenseApiTracker.services;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +58,28 @@ public class ExpenseServiceImpl implements ExpenseService {
 		existingExpenseDetails.setDate(null!=expense.getDate() ? expense.getDate() : existingExpenseDetails.getDate());
 		
 		return expenseRepo.save(existingExpenseDetails);
+	}
+	
+	@Override
+	public List<Expenses> readByCategory(String category, Pageable page) {
+		
+		return expenseRepo.findByCategory(category, page).toList();
+	}
+	
+	@Override
+	public List<Expenses> readByName(String keyword, Pageable page) {
+		
+		return expenseRepo.findByNameContaining(keyword, page).toList();
+	}
+	
+	@Override
+	public List<Expenses> readByDate(Date startDate, Date endDate, Pageable page) {
+		
+		if(startDate == null) startDate = new Date(0);
+		
+		if(endDate == null) endDate = new Date(System.currentTimeMillis());
+		
+		return expenseRepo.findByDateBetween(startDate, endDate, page).toList();
 	}
 
 }
