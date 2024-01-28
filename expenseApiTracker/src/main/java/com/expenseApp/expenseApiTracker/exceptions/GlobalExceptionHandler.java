@@ -34,6 +34,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.NOT_FOUND) ;
 	}
 	
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<ErrorObject> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request){
+		
+		ErrorObject errorObject =  new ErrorObject();
+		
+		errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
+		errorObject.setMessage(ex.getMessage());
+		errorObject.setTimestamp(new Date());
+		
+		return new ResponseEntity<ErrorObject>(errorObject, HttpStatus.NOT_FOUND) ;
+	}
 	
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	public ResponseEntity<ErrorObject> handleMethodArgumentMistmatchException(MethodArgumentTypeMismatchException ex, WebRequest request){
