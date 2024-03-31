@@ -1,6 +1,7 @@
 package com.expenseApp.expenseApiTracker.repository;
 
 import java.sql.Date;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,4 +21,8 @@ public interface ExpenseRepository extends JpaRepository<Expenses, Long> {
 	
 	//SELECT * from tbl_expenses WHERE date BETWEEN 'startDate' AND 'endDate'
 	Page<Expenses> findByDateBetween(Date startDate, Date endDate, Pageable page);
+	
+	Page<Expenses> findByUserId(Long userId, Pageable page);
+	
+	Optional<Expenses> findByUserIdAndId(Long userId, Long expenseId);
 }
