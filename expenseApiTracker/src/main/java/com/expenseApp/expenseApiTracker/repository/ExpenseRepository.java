@@ -14,13 +14,13 @@ import com.expenseApp.expenseApiTracker.entity.Expenses;
 public interface ExpenseRepository extends JpaRepository<Expenses, Long> {
 	
 	// SELECT * from tbl_expenses WHERE category=? --> this query runs behind thru hibernate.
-	Page<Expenses> findByCategory(String category, Pageable page);
+	Page<Expenses> findByUserIdAndCategory(Long userId,String category, Pageable page);
 	
 	// SELECT * from tbl_expenses WHERE name="%keyword%"? --> this query runs behind thru hibernate.
-	Page<Expenses> findByNameContaining(String keyword, Pageable page);
+	Page<Expenses> findByUserIdAndNameContaining(Long userId,String keyword, Pageable page);
 	
 	//SELECT * from tbl_expenses WHERE date BETWEEN 'startDate' AND 'endDate'
-	Page<Expenses> findByDateBetween(Date startDate, Date endDate, Pageable page);
+	Page<Expenses> findByUserIdAndDateBetween(Long userId,Date startDate, Date endDate, Pageable page);
 	
 	Page<Expenses> findByUserId(Long userId, Pageable page);
 	
